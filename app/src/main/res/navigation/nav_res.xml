@@ -22,4 +22,7 @@
             android:name="book_desc"
             app:argType="com.example.android3l1v2.BookModel" />
     </fragment>
+
+
+
 </navigation>
