@@ -11,51 +11,43 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android3l1v2.databinding.BookItemBinding;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
 
-    private List<BookModel> list;
-    private LayoutInflater inflater;
-    private Context context;
+    private List<BookModel> list =  new ArrayList<>();
     private BookItemBinding itemBinding;
+    private OnClick onClick;
 
-    public RecyclerAdapter (List<BookModel>list, Context context) {
-        this.list = list;
-        this.context = context;
-        this.inflater = LayoutInflater.from(context);
+    public void setOnClick(OnClick onClick) {
+        this.onClick = onClick;
+    }
+
+    public void setIn(List<BookModel> lif){
+        list = lif;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.book_item, parent, false);
-        return new RecyclerViewHolder(view);
+        itemBinding = BookItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new RecyclerViewHolder(itemBinding.getRoot());
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        //holder.txtTitle.setText(list.get(position).getTitle());
-        itemBinding.itemTitleTxt.setText(list.get(position).getTitle());
-        //holder.iconImage.setImageResource(list.get(position).getIcon());
-        itemBinding.itemIcon.setImageResource(list.get(position).getIcon());
+        holder.onBind(list.get(position));
+
+
         itemBinding.itemIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickI(position);
+
             }
         });
-        itemBinding.itemTitleTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickI(position);
-            }
-        });
-    }
-    public void clickI(int position){
-        Intent intent = new Intent(context, AboutFragment.class);
-        intent.putExtra("book", list.get(position).getTitle());
-        context.startActivity(intent);
     }
 
     @Override
@@ -67,7 +59,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
+        }
 
+        public void onBind(BookModel bookModel) {
+            itemBinding.itemTitleTxt.setText(bookModel.getTitle());
+            itemBinding.itemIcon.setImageResource(bookModel.getIcon());
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClick.getSmt(bookModel);
+                }
+            });
         }
     }
 }

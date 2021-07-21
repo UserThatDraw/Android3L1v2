@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/desc_txt"
-        android:text="Описане"
+        android:text="@string/BookDesc"
         app:layout_constraintTop_toBottomOf="@id/view_line"
         app:layout_constraintLeft_toLeftOf="parent"
         android:fontFamily="sans-serif-black"
@@ -37,7 +37,7 @@
 
     <TextView
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="НАЗВАНИЕ"
+        android:text="@string/BookName"
         android:textAllCaps="true"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="20dp"
