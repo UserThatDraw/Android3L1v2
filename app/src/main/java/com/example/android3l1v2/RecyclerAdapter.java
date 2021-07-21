@@ -68,7 +68,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onClick.getSmt(bookModel);
+                    onClick.getSmt(bookModel, v);
                 }
             });
         }

@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,6 +55,7 @@ public class ListFragment extends Fragment {
         viewModel.listM.observe(getViewLifecycleOwner(), new Observer<List<BookModel>>() {
             @Override
             public void onChanged(List<BookModel> bookModels) {
+                listBinding.btn.setVisibility(View.GONE);
                 adapter.setIn(bookModels);
             }
         });
@@ -70,8 +73,8 @@ public class ListFragment extends Fragment {
     private void openAboutFragment() {
         adapter.setOnClick(new OnClick() {
             @Override
-            public void getSmt(BookModel model) {
-
+            public void getSmt(BookModel model, View view) {
+                Navigation.findNavController(view).navigate(ListFragmentDirections.actionListFragment4ToAboutFragment2(model).setBookDesc(model));
             }
         });
     }

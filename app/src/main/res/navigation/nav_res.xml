@@ -10,11 +10,16 @@
         android:label="@string/Books"
         tools:layout="@layout/fragment_list" >
         <action
-            android:id="@+id/action_listFragment4_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
+            android:id="@+id/action_listFragment4_to_aboutFragment2"
+            app:destination="@id/aboutFragment2" />
     </fragment>
     <fragment
-        android:id="@+id/aboutFragment"
+        android:id="@+id/aboutFragment2"
         android:name="com.example.android3l1v2.AboutFragment"
-        android:label="AboutFragment" />
+        android:label="@string/Book"
+        tools:layout="@layout/fragment_about" >
+        <argument
+            android:name="book_desc"
+            app:argType="com.example.android3l1v2.BookModel" />
+    </fragment>
 </navigation>

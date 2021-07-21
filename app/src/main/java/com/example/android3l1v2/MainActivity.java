@@ -3,21 +3,41 @@ package com.example.android3l1v2;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 
-import com.example.android3l1v2.databinding.ActivityMainBinding;
-import com.example.android3l1v2.databinding.FragmentListBinding;
 
 public class MainActivity extends AppCompatActivity {
+
+    NavController navController;
+
+    AppBarConfiguration appBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupNavigation();
+    }
 
-        FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
-        manager.replace(R.id.frame_lay, new ListFragment()).commit();
+    private void setupNavigation() {
+        NavHostFragment navHostFragment =
+                (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
+
+        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()
+        ).build();
+        NavigationUI.setupActionBarWithNavController(this,navController, appBarConfiguration);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 
 
