@@ -16,16 +16,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class AboutFragment extends BaseFragment <FragmentAboutBinding> {
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAboutBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
-
-
-
 
     @Override
     protected void initialize() {
